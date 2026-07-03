@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@theme {
+  --font-ibm-plex-mono: "IBM Plex Mono", monospace;
+}
+
+@layer components {
+  .test-class {
+    @apply bg-amber-300 text-4xl
+  }
+}

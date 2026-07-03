@@ -1,11 +1,15 @@
 import { useState } from 'react'
+import LanguageSelector from '@components/LanguageSelector'
+import TypeArea from '@components/TypeArea'
 
-
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [language, setLanguage] = useState('c')
 
   return (
-    <h1>Hello, Typing-Web!</h1>
+    <div>
+      <LanguageSelector selected={language} onChange={setLanguage} />
+      <TypeArea language={language} />
+    </div>
   )
 }
 

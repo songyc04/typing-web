@@ -1,0 +1,8 @@
+[
+  {
+    "id": "c-001",
+    "title": "배열 합계 구하기",
+    "difficulty": "easy",
+    "code": "int sum = 0;\nfor (int i = 0; i < n; i++) {\n    sum += arr[i];\n}\nprintf(\"%d\\n\", sum);"
+  }
+]

@@ -1,0 +1,8 @@
+[
+  {
+    "id": "java-001",
+    "title": "최댓값 찾기",
+    "difficulty": "easy",
+    "code": "int max = arr[0];\nfor (int i = 1; i < arr.length; i++) {\n    if (arr[i] > max) {\n        max = arr[i];\n    }\n}\nSystem.out.println(max);"
+  }
+]

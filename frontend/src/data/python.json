@@ -1,0 +1,8 @@
+[
+  {
+    "id": "py-001",
+    "title": "짝수 필터링",
+    "difficulty": "easy",
+    "code": "def get_evens(numbers):\n    return [n for n in numbers if n % 2 == 0]\n\nprint(get_evens([1, 2, 3, 4, 5, 6]))"
+  }
+]
