@@ -1,8 +1,8 @@
 [
   {
     "id": "java-001",
-    "title": "최댓값 찾기",
+    "title": "학생 성적 관리",
     "difficulty": "easy",
-    "code": "int max = arr[0];\nfor (int i = 1; i < arr.length; i++) {\n    if (arr[i] > max) {\n        max = arr[i];\n    }\n}\nSystem.out.println(max);"
+    "code": "import java.util.ArrayList;\nimport java.util.List;\n\npublic class Student {\n    private String name;\n    private int score;\n\n    public Student(String name, int score) {\n        this.name = name;\n        this.score = score;\n    }\n\n    public int getScore() {\n        return score;\n    }\n\n    public static void main(String[] args) {\n        List<Student> students = new ArrayList<>();\n        students.add(new Student(\"Alice\", 85));\n        students.add(new Student(\"Bob\", 92));\n\n        int total = 0;\n        for (Student s : students) {\n            total += s.getScore();\n        }\n        double average = (double) total / students.size();\n        System.out.println(\"평균 점수: \" + average);\n    }\n}"
   }
 ]
