@@ -3,7 +3,7 @@ import LanguageSelector from '@components/LanguageSelector'
 import TypeArea from '@components/TypeArea'
 
 const App = () => {
-  const [language, setLanguage] = useState('c')
+  const [language, setLanguage] = useState('c');
 
   return (
     <div>
