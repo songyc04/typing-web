@@ -2,11 +2,19 @@ import { useState, useRef, useEffect } from 'react'
 import cSnippets from '@data/c.json'
 import javaSnippets from '@data/java.json'
 import pythonSnippets from '@data/python.json'
+import cppSnippets from '@data/cpp.json'
+import javascriptSnippets from '@data/javascript.json'
+import typescriptSnippets from '@data/typescript.json'
+import sqlSnippets from '@data/sql.json'
 
 const SNIPPETS = {
   c: cSnippets,
   java: javaSnippets,
   python: pythonSnippets,
+  cpp: cppSnippets,
+  javascript: javascriptSnippets,
+  typescript: typescriptSnippets,
+  sql: sqlSnippets,
 }
 
 const buildKeyMap = () => {
@@ -74,8 +82,8 @@ const resolveChar = (e) => {
 const TypeArea = ({ language }) => {
   const [typed, setTyped] = useState('')
   const inputRef = useRef(null)
-
-  const snippet = SNIPPETS[language]?.[0]
+  
+  const snippet = SNIPPETS[language]?.[Math.floor(Math.random() * (2 - 0 + 1))]
 
   useEffect(() => {
     setTyped('')
@@ -100,8 +108,6 @@ const TypeArea = ({ language }) => {
   })()
 
   const handleKeyDown = (e) => {
-    if (e.nativeEvent.isComposing) return
-
     if (e.code === 'Backspace') {
       e.preventDefault()
       setTyped((prev) => prev.slice(0, -1))
@@ -127,6 +133,10 @@ const TypeArea = ({ language }) => {
     }
   }
 
+  const handleCompositionStart = (e) => {
+    e.preventDefault()
+  }
+
   return (
     <div className="p-4" onClick={() => inputRef.current?.focus()}>
       <h2 className="text-2xl font-bold mb-4">{snippet.title}</h2>
@@ -134,8 +144,15 @@ const TypeArea = ({ language }) => {
         ref={inputRef}
         type="text"
         onKeyDown={handleKeyDown}
+        onCompositionStart={handleCompositionStart}
         className="absolute opacity-0 pointer-events-none"
         autoFocus
+        lang="en"
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
+        style={{ imeMode: 'disabled' }}
       />
       <div className="font-ibm-plex-mono bg-gray-100 p-4 rounded">
         {targetLines.map((line, lineIdx) => {

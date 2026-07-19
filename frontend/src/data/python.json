@@ -4,5 +4,17 @@
     "title": "피보나치 수열",
     "difficulty": "easy",
     "code": "def fibonacci(n):\n    sequence = [0, 1]\n    while len(sequence) < n:\n        sequence.append(sequence[-1] + sequence[-2])\n    return sequence[:n]\n\n\nclass Calculator:\n    def __init__(self):\n        self.history = []\n\n    def add(self, a, b):\n        result = a + b\n        self.history.append(result)\n        return result\n\n\nif __name__ == \"__main__\":\n    print(fibonacci(10))\n    calc = Calculator()\n    print(calc.add(3, 5))"
+  },
+  {
+    "id": "py-002",
+    "title": "파일 단어 분석",
+    "difficulty": "medium",
+    "code": "import os\nfrom collections import Counter\n\n\ndef count_words(filepath):\n    if not os.path.exists(filepath):\n        raise FileNotFoundError(f\"파일을 찾을 수 없습니다: {filepath}\")\n\n    with open(filepath, \"r\", encoding=\"utf-8\") as f:\n        text = f.read().lower()\n\n    words = text.split()\n    counter = Counter(words)\n    return counter.most_common(10)\n\n\nif __name__ == \"__main__\":\n    try:\n        result = count_words(\"sample.txt\")\n        for word, count in result:\n            print(f\"{word}: {count}\")\n    except FileNotFoundError as e:\n        print(e)"
+  },
+  {
+    "id": "py-003",
+    "title": "데코레이터와 재시도",
+    "difficulty": "hard",
+    "code": "import time\nimport functools\n\n\ndef timer(func):\n    @functools.wraps(func)\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        result = func(*args, **kwargs)\n        elapsed = time.time() - start\n        print(f\"{func.__name__} 실행 시간: {elapsed:.4f}초\")\n        return result\n    return wrapper\n\n\ndef retry(max_attempts=3):\n    def decorator(func):\n        @functools.wraps(func)\n        def wrapper(*args, **kwargs):\n            for attempt in range(1, max_attempts + 1):\n                try:\n                    return func(*args, **kwargs)\n                except Exception as e:\n                    if attempt == max_attempts:\n                        raise\n                    print(f\"재시도 {attempt}/{max_attempts}: {e}\")\n        return wrapper\n    return decorator\n\n\n@timer\n@retry(max_attempts=3)\ndef fetch_data(url):\n    import urllib.request\n    with urllib.request.urlopen(url) as response:\n        return response.read()"
   }
 ]

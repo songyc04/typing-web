@@ -1,0 +1,20 @@
+[
+  {
+    "id": "cpp-001",
+    "title": "간단한 계산기",
+    "difficulty": "easy",
+    "code": "#include <iostream>\n\nclass Calculator {\npublic:\n    int add(int a, int b) {\n        return a + b;\n    }\n\n    int multiply(int a, int b) {\n        return a * b;\n    }\n};\n\nint main() {\n    Calculator calc;\n    std::cout << calc.add(3, 5) << std::endl;\n    std::cout << calc.multiply(4, 6) << std::endl;\n    return 0;\n}"
+  },
+  {
+    "id": "cpp-002",
+    "title": "벡터 정렬과 탐색",
+    "difficulty": "medium",
+    "code": "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    std::vector<int> numbers = {5, 2, 8, 1, 9, 3};\n\n    std::sort(numbers.begin(), numbers.end());\n\n    auto it = std::find(numbers.begin(), numbers.end(), 8);\n    if (it != numbers.end()) {\n        std::cout << \"Found: \" << *it << std::endl;\n    }\n\n    for (int n : numbers) {\n        std::cout << n << \" \";\n    }\n    std::cout << std::endl;\n    return 0;\n}"
+  },
+  {
+    "id": "cpp-003",
+    "title": "이진 탐색 트리",
+    "difficulty": "hard",
+    "code": "#include <iostream>\n\nstruct Node {\n    int value;\n    Node* left;\n    Node* right;\n    Node(int v) : value(v), left(nullptr), right(nullptr) {}\n};\n\nclass BST {\nprivate:\n    Node* root;\n\n    void insert(Node*& node, int value) {\n        if (node == nullptr) {\n            node = new Node(value);\n            return;\n        }\n        if (value < node->value) {\n            insert(node->left, value);\n        } else {\n            insert(node->right, value);\n        }\n    }\n\n    void inorder(Node* node) {\n        if (node == nullptr) return;\n        inorder(node->left);\n        std::cout << node->value << \" \";\n        inorder(node->right);\n    }\n\npublic:\n    BST() : root(nullptr) {}\n\n    void insert(int value) {\n        insert(root, value);\n    }\n\n    void print() {\n        inorder(root);\n        std::cout << std::endl;\n    }\n};\n\nint main() {\n    BST tree;\n    tree.insert(50);\n    tree.insert(30);\n    tree.insert(70);\n    tree.insert(20);\n    tree.insert(40);\n    tree.print();\n    return 0;\n}"
+  }
+]

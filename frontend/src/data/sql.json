@@ -1,0 +1,20 @@
+[
+  {
+    "id": "sql-001",
+    "title": "기본 조회",
+    "difficulty": "easy",
+    "code": "SELECT id, name, email\nFROM users\nWHERE status = 'active'\nORDER BY created_at DESC\nLIMIT 10;"
+  },
+  {
+    "id": "sql-002",
+    "title": "주문과 고객 조인",
+    "difficulty": "medium",
+    "code": "SELECT\n    c.customer_name,\n    COUNT(o.order_id) AS total_orders,\n    SUM(o.amount) AS total_amount\nFROM customers c\nLEFT JOIN orders o ON c.customer_id = o.customer_id\nWHERE o.order_date >= '2024-01-01'\nGROUP BY c.customer_id, c.customer_name\nHAVING SUM(o.amount) > 1000\nORDER BY total_amount DESC;"
+  },
+  {
+    "id": "sql-003",
+    "title": "월별 순위 분석",
+    "difficulty": "hard",
+    "code": "WITH monthly_sales AS (\n    SELECT\n        DATE_TRUNC('month', order_date) AS month,\n        product_id,\n        SUM(amount) AS total_sales\n    FROM orders\n    WHERE order_date >= '2024-01-01'\n    GROUP BY DATE_TRUNC('month', order_date), product_id\n)\nSELECT\n    month,\n    product_id,\n    total_sales,\n    RANK() OVER (PARTITION BY month ORDER BY total_sales DESC) AS rank,\n    SUM(total_sales) OVER (PARTITION BY month) AS monthly_total\nFROM monthly_sales\nWHERE total_sales > 500\nORDER BY month, rank;"
+  }
+]

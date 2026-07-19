@@ -2,6 +2,10 @@ const LANGUAGES = [
   { id: 'c', label: 'C' },
   { id: 'java', label: 'Java' },
   { id: 'python', label: 'Python' },
+  { id: 'cpp', label: 'C++' },
+  { id: 'javascript', label: 'Javascript' },
+  { id: 'typescript', label: 'Typescript' },
+  { id: 'sql', label: 'SQL' }
 ]
 
 const LanguageSelector = ({ selected, onChange }) => {
@@ -16,8 +20,8 @@ const LanguageSelector = ({ selected, onChange }) => {
             onClick={() => onChange(lang.id)}
             className={
               isActive
-                ? 'px-4 py-2 rounded bg-blue-500 text-white hover:cursor-pointer'
-                : 'px-4 py-2 rounded bg-gray-200 text-gray-800 hover:bg-gray-300 hover:cursor-pointer'
+                ? 'active-lanSelector'
+                : 'lanSelector'
             }
           >
             {lang.label}

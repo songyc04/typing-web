@@ -4,5 +4,17 @@
     "title": "버블 정렬",
     "difficulty": "medium",
     "code": "void bubbleSort(int arr[], int n) {\n    for (int i = 0; i < n - 1; i++) {\n        for (int j = 0; j < n - i - 1; j++) {\n            if (arr[j] > arr[j + 1]) {\n                int temp = arr[j];\n                arr[j] = arr[j + 1];\n                arr[j + 1] = temp;\n            }\n        }\n    }\n}\n\nint main() {\n    int arr[] = {64, 25, 12, 22, 11};\n    int n = sizeof(arr) / sizeof(arr[0]);\n    bubbleSort(arr, n);\n    for (int i = 0; i < n; i++) {\n        printf(\"%d \", arr[i]);\n    }\n    return 0;\n}"
+  },
+  {
+    "id": "c-002",
+    "title": "기초 입출력",
+    "difficulty": "easy",
+    "code": "#include <stdio.h>\n\nint main() {\n    char name[50];\n    int age;\n\n    printf(\"이름을 입력하세요: \");\n    scanf(\"%s\", name);\n    printf(\"나이를 입력하세요: \");\n    scanf(\"%d\", &age);\n\n    printf(\"안녕하세요, %s님! 나이는 %d세입니다.\\n\", name, age);\n    return 0;\n}"
+  },
+  {
+    "id": "c-003",
+    "title": "연결 리스트",
+    "difficulty": "hard",
+    "code": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\ntypedef struct Node {\n    char name[50];\n    struct Node* next;\n} Node;\n\nNode* createNode(const char* name) {\n    Node* node = (Node*)malloc(sizeof(Node));\n    strcpy(node->name, name);\n    node->next = NULL;\n    return node;\n}\n\nvoid append(Node** head, const char* name) {\n    Node* newNode = createNode(name);\n    if (*head == NULL) {\n        *head = newNode;\n        return;\n    }\n    Node* curr = *head;\n    while (curr->next != NULL) {\n        curr = curr->next;\n    }\n    curr->next = newNode;\n}\n\nvoid printList(Node* head) {\n    Node* curr = head;\n    while (curr != NULL) {\n        printf(\"%s -> \", curr->name);\n        curr = curr->next;\n    }\n    printf(\"NULL\\n\");\n}\n\nint main() {\n    Node* head = NULL;\n    append(&head, \"Alice\");\n    append(&head, \"Bob\");\n    append(&head, \"Charlie\");\n    printList(head);\n    return 0;\n}"
   }
 ]

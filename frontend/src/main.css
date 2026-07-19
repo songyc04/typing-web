@@ -8,4 +8,10 @@
   .test-class {
     @apply bg-amber-300 text-4xl
   }
+  .active-lanSelector {
+    @apply px-4 py-2 rounded bg-blue-500 text-white hover:cursor-pointer
+  }
+  .lanSelector {
+    @apply px-4 py-2 rounded bg-gray-200 text-gray-800 hover:bg-gray-300 hover:cursor-pointer
+  }
 }

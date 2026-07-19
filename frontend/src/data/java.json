@@ -4,5 +4,17 @@
     "title": "학생 성적 관리",
     "difficulty": "easy",
     "code": "import java.util.ArrayList;\nimport java.util.List;\n\npublic class Student {\n    private String name;\n    private int score;\n\n    public Student(String name, int score) {\n        this.name = name;\n        this.score = score;\n    }\n\n    public int getScore() {\n        return score;\n    }\n\n    public static void main(String[] args) {\n        List<Student> students = new ArrayList<>();\n        students.add(new Student(\"Alice\", 85));\n        students.add(new Student(\"Bob\", 92));\n\n        int total = 0;\n        for (Student s : students) {\n            total += s.getScore();\n        }\n        double average = (double) total / students.size();\n        System.out.println(\"평균 점수: \" + average);\n    }\n}"
+  },
+  {
+    "id": "java-002",
+    "title": "제네릭 스택",
+    "difficulty": "medium",
+    "code": "import java.util.ArrayList;\nimport java.util.EmptyStackException;\nimport java.util.List;\n\npublic class Stack<T> {\n    private List<T> items = new ArrayList<>();\n\n    public void push(T item) {\n        items.add(item);\n    }\n\n    public T pop() {\n        if (items.isEmpty()) {\n            throw new EmptyStackException();\n        }\n        return items.remove(items.size() - 1);\n    }\n\n    public T peek() {\n        if (items.isEmpty()) {\n            throw new EmptyStackException();\n        }\n        return items.get(items.size() - 1);\n    }\n\n    public boolean isEmpty() {\n        return items.isEmpty();\n    }\n\n    public static void main(String[] args) {\n        Stack<Integer> stack = new Stack<>();\n        stack.push(10);\n        stack.push(20);\n        stack.push(30);\n        System.out.println(stack.pop());\n        System.out.println(stack.peek());\n    }\n}"
+  },
+  {
+    "id": "java-003",
+    "title": "스레드 동기화",
+    "difficulty": "hard",
+    "code": "import java.util.ArrayList;\nimport java.util.List;\n\npublic class ThreadSafeCounter {\n    private int count = 0;\n    private final Object lock = new Object();\n\n    public void increment() {\n        synchronized (lock) {\n            count++;\n        }\n    }\n\n    public int getCount() {\n        synchronized (lock) {\n            return count;\n        }\n    }\n\n    public static void main(String[] args) throws InterruptedException {\n        ThreadSafeCounter counter = new ThreadSafeCounter();\n        List<Thread> threads = new ArrayList<>();\n\n        for (int i = 0; i < 5; i++) {\n            Thread t = new Thread(() -> {\n                for (int j = 0; j < 1000; j++) {\n                    counter.increment();\n                }\n            });\n            threads.add(t);\n            t.start();\n        }\n\n        for (Thread t : threads) {\n            t.join();\n        }\n\n        System.out.println(\"Final count: \" + counter.getCount());\n    }\n}"
   }
 ]

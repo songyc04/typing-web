@@ -1,0 +1,20 @@
+[
+  {
+    "id": "ts-001",
+    "title": "사용자 인터페이스",
+    "difficulty": "easy",
+    "code": "interface User {\n    id: number;\n    name: string;\n    email: string;\n}\n\nfunction greet(user: User): string {\n    return `Hello, ${user.name}!`;\n}\n\nconst alice: User = {\n    id: 1,\n    name: \"Alice\",\n    email: \"alice@example.com\"\n};\n\nconsole.log(greet(alice));"
+  },
+  {
+    "id": "ts-002",
+    "title": "제네릭 함수",
+    "difficulty": "medium",
+    "code": "function getFirst<T>(items: T[]): T | undefined {\n    return items.length > 0 ? items[0] : undefined;\n}\n\nfunction mapToDict<T, K extends keyof T>(items: T[], key: K): Record<string, T> {\n    const result: Record<string, T> = {};\n    for (const item of items) {\n        const keyValue = String(item[key]);\n        result[keyValue] = item;\n    }\n    return result;\n}\n\nconst users = [{ id: 1, name: \"Alice\" }, { id: 2, name: \"Bob\" }];\nconst userMap = mapToDict(users, \"id\");\nconsole.log(getFirst(users));"
+  },
+  {
+    "id": "ts-003",
+    "title": "유틸리티 타입과 비동기",
+    "difficulty": "hard",
+    "code": "type ApiResponse<T> = {\n    data: T;\n    status: number;\n    timestamp: number;\n};\n\ntype PartialResponse<T> = Partial<ApiResponse<T>>;\ntype ReadonlyResponse<T> = Readonly<ApiResponse<T>>;\n\ninterface Product {\n    id: number;\n    name: string;\n    price: number;\n}\n\nasync function fetchProduct(id: number): Promise<ApiResponse<Product> | null> {\n    try {\n        const response = await fetch(`/api/products/${id}`);\n        if (!response.ok) return null;\n        return await response.json() as ApiResponse<Product>;\n    } catch (error) {\n        console.error(\"Fetch failed:\", error);\n        return null;\n    }\n}\n\nconst cache: Map<number, Product> = new Map();"
+  }
+]
